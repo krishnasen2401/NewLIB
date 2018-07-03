@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/bookidDP"
+        android:layout_width="135dp"
+        android:layout_height="33dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/bookName"
+        android:layout_width="200dp"
+        android:layout_height="116dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/Deletebk"
+        android:layout_width="157dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:onClick="DeletBk1"
+        android:text="Delete" />
+
+</LinearLayout>
