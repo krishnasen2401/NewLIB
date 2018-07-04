@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Display" />
-        <activity android:name=".StudentReg"></activity>
+        <activity android:name=".StudentReg" />
+        <activity android:name=".StudentListDisplayXml"></activity>
     </application>
 
 </manifest>

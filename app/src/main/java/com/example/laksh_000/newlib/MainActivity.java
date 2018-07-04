@@ -120,4 +120,8 @@ public void DisplayBookList(View view){
         PermissionRequest1();
 
     }
+    public void DisplayStudent1(View v){
+        Intent intent=new Intent(this,StudentListDisplayXml.class);
+        startActivity(intent);
+    }
 }

@@ -109,6 +109,34 @@ public class Databasehelper extends SQLiteOpenHelper {
         db.close();
         return BooksLinkedList;
     }
+
+    public List<StudentIDdata> studentviewlist(String filter) {
+        String query;
+        if(filter.equals("")){
+            query = "SELECT  * FROM " + TABLE_STUDENTList;
+        }else{
+            //filter results by filter option provided
+            query = "SELECT  * FROM " + TABLE_STUDENTList + " ORDER BY "+ filter;
+        }
+        List<StudentIDdata> StudentMLinkedList = new LinkedList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        StudentIDdata mainlist;
+        if (cursor.moveToFirst()) {
+            do {
+                mainlist = new StudentIDdata();
+                mainlist.setId(cursor.getString(cursor.getColumnIndex(STUDENTList_ID)));
+                mainlist.setName(cursor.getString(cursor.getColumnIndex(STUDENTList_NAME)));
+                mainlist.setSClass(cursor.getString(cursor.getColumnIndex(STUDENTList_CLASS)));
+                StudentMLinkedList.add(mainlist);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return StudentMLinkedList;
+    }
+
+
     public void deletebookRecord(String id,Context context) {
         try {
             SQLiteDatabase db = this.getWritableDatabase();

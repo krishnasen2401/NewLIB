@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/StudentIDList"
+        android:layout_width="155dp"
+        android:layout_height="48dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/StudentNameList"
+        android:layout_width="232dp"
+        android:layout_height="52dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/ClassIdList"
+        android:layout_width="95dp"
+        android:layout_height="54dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
