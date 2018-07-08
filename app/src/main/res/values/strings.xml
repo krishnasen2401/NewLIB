@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">NewLIB</string>
-    <string-array name="classes">
+    <string-array name="classeslt">
         <item>Playgroup</item>
         <item>M1</item>
         <item>M2</item>
         <item>M3</item>
+    </string-array>
+    <string-array name="genderlt">
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
 
 </resources>

@@ -36,8 +36,10 @@ public class Databasehelper extends SQLiteOpenHelper {
     public static final String STUDENTList_PNUMBER1="Pnumber1";
     public static final String STUDENTList_PNAME2="Pname2";
     public static final String STUDENTList_PNUMBER2="Pnumber2";
+    public static final String STUDENTList_age="DOB";
+    public static final String STUDENTList_gender="gender";
     public Databasehelper(Context context) {
-        super(context, DATABASE_NAME , null, 3);
+        super(context, DATABASE_NAME , null, 1);
         this.mycontext=context;
     }
     @Override
@@ -45,7 +47,7 @@ public class Databasehelper extends SQLiteOpenHelper {
       //bookdb
         db.execSQL(" CREATE TABLE " + TABLE_NAME + " (" +COLUMN_ID + " Varchar PRIMARY KEY, " +Book_NAME + " Varchar NOT NULL, " +BOOK_Status + " Varchar NOT NULL);");
     //studentdb
-        db.execSQL(" CREATE TABLE " + TABLE_STUDENTList + " (" + STUDENTList_ID + " Varchar PRIMARY KEY,"+STUDENTList_NAME+" varchar NOT NULL,"+STUDENTList_CLASS+" varchar NOT NUll,"+STUDENTList_PNAME1+" varchar not null,"+STUDENTList_PNUMBER1+" decimal(10,0) not null,"+STUDENTList_PNAME2+" varchar not null,"+STUDENTList_PNUMBER2+" decimal(10,0) not null);");
+        db.execSQL(" CREATE TABLE " + TABLE_STUDENTList + " (" + STUDENTList_ID + " Varchar PRIMARY KEY,"+STUDENTList_NAME+" varchar NOT NULL,"+STUDENTList_age+" varchar,"+STUDENTList_gender+" varchar,"+STUDENTList_CLASS+" varchar NOT NUll,"+STUDENTList_PNAME1+" varchar not null,"+STUDENTList_PNUMBER1+" decimal(10,0) not null,"+STUDENTList_PNAME2+" varchar not null,"+STUDENTList_PNUMBER2+" decimal(10,0) not null);");
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
                     // you can implement here migration process
@@ -59,6 +61,8 @@ public class Databasehelper extends SQLiteOpenHelper {
         ContentValues values=new ContentValues();
         values.put(STUDENTList_ID,studentid.getId());
         values.put(STUDENTList_NAME,studentid.getName());
+        values.put(STUDENTList_age,studentid.getAge());
+        values.put(STUDENTList_gender,studentid.getGender());
         values.put(STUDENTList_CLASS,studentid.getSClass());
         values.put(STUDENTList_PNAME1,studentid.getName1());
         values.put(STUDENTList_PNUMBER1,studentid.getPhone1());

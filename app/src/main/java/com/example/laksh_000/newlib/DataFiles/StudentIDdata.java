@@ -1,5 +1,7 @@
 package com.example.laksh_000.newlib.DataFiles;
 
+import java.util.Date;
+
 public class StudentIDdata {
 private String id;
 private String name;
@@ -8,15 +10,20 @@ private String name1;
 private long Phone1;
 private String name2;
 private long Phone2;
+private String age;
+private String gender;
 public StudentIDdata(){}
-public StudentIDdata(String id,String name,String Class,String name1,long phone1,String name2,long phone2){
+public StudentIDdata(String id,String name,String age,String gender,String Class,String name1,long phone1,String name2,long phone2){
 this.id=id;
 this.name=name;
+    this.age=age;
+    this.gender=gender;
     this.Class=Class;
     this.name1=name1;
     this.Phone1=phone1;
     this.name2=name2;
     this.Phone2=phone2;
+
 }
 public String getId(){return  id;}
 public void setId(String id){this.id=id;}
@@ -32,4 +39,8 @@ public void setId(String id){this.id=id;}
     public void setName2(String name22){this.name2=name22;}
     public long getPhone2(){return  Phone2;}
     public void setPhone2(long Phone22){this.Phone2=Phone22;}
+    public String getAge(){return age;}
+    public void setAge(String age){this.age=age;}
+    public String getGender(){return gender;}
+    public void setGender(){this.gender=gender;}
 }
