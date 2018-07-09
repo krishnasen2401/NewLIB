@@ -1,6 +1,7 @@
 package com.example.laksh_000.newlib.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.laksh_000.newlib.DataFiles.StudentIDdata;
 import com.example.laksh_000.newlib.R;
+import com.example.laksh_000.newlib.StudentFullDisplay;
 
 import java.util.List;
 
@@ -55,6 +57,9 @@ public class StudentListDisplay extends RecyclerView.Adapter<StudentListDisplay.
 
             @Override
             public boolean onLongClick(View v) {
+                Intent intent=new Intent(mContext1,StudentFullDisplay.class);
+                intent.putExtra("Dataid",studentnames1.getId());
+                mContext1.startActivity(intent);
                 Log.i("Click Status","Long CLicked at"+studentnames1.getId());
                 return true;
             }

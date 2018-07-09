@@ -21,7 +21,9 @@
         </activity>
         <activity android:name=".Display" />
         <activity android:name=".StudentReg" />
-        <activity android:name=".StudentListDisplayXml"></activity>
+        <activity android:name=".StudentListDisplayXml" />
+        <activity android:name=".StudentFullDisplay" />
+        <activity android:name=".StudentFullDisplay"></activity>
     </application>
 
 </manifest>
