@@ -1,9 +1,14 @@
 package com.example.laksh_000.newlib;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.laksh_000.newlib.DataFiles.StudentIDdata;
@@ -13,26 +18,48 @@ import java.util.ArrayList;
 
 public class StudentFullDisplay extends AppCompatActivity {
     private String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studen_display_full);
         Bundle bundle = getIntent().getExtras();
-        TextView id1=findViewById(R.id.StidDis);
+        TextView id1 = findViewById(R.id.StidDis);
         id1.setText(bundle.getString("id"));
-        TextView name=findViewById(R.id.StNameDis);
+        TextView name = findViewById(R.id.StNameDis);
         name.setText(bundle.getString("name"));
-        TextView age=findViewById(R.id.Stuage);
+        TextView age = findViewById(R.id.Stuage);
         age.setText(bundle.getString("age"));
-        TextView classes=findViewById(R.id.Stclassdis);
+        TextView classes = findViewById(R.id.Stclassdis);
         classes.setText(bundle.getString("class"));
-        TextView pnam1=findViewById(R.id.Studp1);
+        TextView pnam1 = findViewById(R.id.Studp1);
         pnam1.setText(bundle.getString("pname1"));
-        TextView pnum1=findViewById(R.id.Stupn1);
-        pnum1.setText(bundle.getString("pnum1"));
-        TextView pnam2=findViewById(R.id.Stup2);
+        TextView pnum1 = findViewById(R.id.Stupn1);
+        final String pnum11 = bundle.getString("pnum1");
+        pnum1.setText(pnum11);
+        TextView pnam2 = findViewById(R.id.Stup2);
         pnam2.setText(bundle.getString("pname2"));
-        TextView pnum2=findViewById(R.id.Stupn2);
-        pnum2.setText(bundle.getString("pnum2"));
+        TextView pnum2 = findViewById(R.id.Stupn2);
+        String pnum22 = bundle.getString("pnum1");
+        pnum2.setText(pnum22);
+        pnum1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                if (ActivityCompat.checkSelfPermission(StudentFullDisplay.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                callIntent.setData(Uri.parse("tel:"+pnum11));
+                startActivity(callIntent);
+            }
+        });
     }
 }

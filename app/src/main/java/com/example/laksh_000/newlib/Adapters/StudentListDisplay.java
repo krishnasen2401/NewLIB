@@ -80,16 +80,7 @@ public class StudentListDisplay extends RecyclerView.Adapter<StudentListDisplay.
             @Override
 
             public void onClick(View v) {
-               /* String Datatester=studentnames1.getId()+":"+studentnames1.getName()+":"+studentnames1.getAge()+":"+studentnames1.getGender()+":"+studentnames1.getSClass()+":"+studentnames1.getName1()+":"+studentnames1.getPhone1()+":"+studentnames1.getName2()+":"+studentnames1.getPhone2();
-                Log.i("id",studentnames1.getId());
-                Log.i("name",studentnames1.getName());
-                Log.i("age",studentnames1.getAge());
-                Log.i("gender",studentnames1.getGender());
-                Log.i("class", studentnames1.getSClass());
-                Log.i("name1",studentnames1.getName1());
-                Log.i("Phone1", String.valueOf(studentnames1.getPhone1()));
-                Log.i("name2",studentnames1.getName2());
-                Log.i("phone2", String.valueOf(studentnames1.getPhone2()));*/
+                Toast.makeText(mContext1, "Long Press to view Complete Profile", Toast.LENGTH_SHORT).show();
             }
         });
 
