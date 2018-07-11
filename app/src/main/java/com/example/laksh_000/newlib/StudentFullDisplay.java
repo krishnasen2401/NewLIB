@@ -45,10 +45,10 @@ public class StudentFullDisplay extends AppCompatActivity {
         pnum1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                if (ActivityCompat.checkSelfPermission(StudentFullDisplay.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);//ACTION_CALL requries permission for dial not required and also permission check
+               // if (ActivityCompat.checkSelfPermission(StudentFullDisplay.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                  //  return;
+                //}
                 callIntent.setData(Uri.parse("tel:"+pnum11));
                 startActivity(callIntent);
             }
