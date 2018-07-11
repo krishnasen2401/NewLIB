@@ -22,7 +22,7 @@ public void AddBook(View view){
     h1=new Databasehelper(this);
     EditText id=findViewById(R.id.BookIdReg);
     EditText name=findViewById(R.id.BookNameReg);
-    String id1=id.getText().toString();
+    String id1=id.getText().toString().toUpperCase();
     String name1=name.getText().toString();
     BookidData bookidData=new BookidData(id1,name1,"Y");
     h1.saveNewbook(bookidData,this);

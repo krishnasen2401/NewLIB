@@ -21,6 +21,8 @@ public class StudentReg extends AppCompatActivity implements AdapterView.OnItemC
     public Databasehelper h1;
     private String genderTX;
     private String classesTX;
+    Spinner spinner;
+    Spinner spinner2;
     EditText age11;
 
 public void PickDate(View view){
@@ -29,7 +31,7 @@ public void PickDate(View view){
     int mMonth = c.get(Calendar.MONTH);
     int mDay = c.get(Calendar.DAY_OF_MONTH);
    // DatePickerDialog datepickerdialog = new DatePickerDialog(this,AlertDialog.THEME_HOLO_LIGHT,ondatelinsten part,year,month,day);
-    DatePickerDialog datePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT,
+    DatePickerDialog datePickerDialog = new DatePickerDialog(this,
             new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year,int monthOfYear, int dayOfMonth) {
@@ -50,8 +52,8 @@ public void PickDate(View view){
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_reg);
-        Spinner spinner = findViewById(R.id.classes1);
-        Spinner spinner2 = findViewById(R.id.gender);
+         spinner = findViewById(R.id.classes1);
+         spinner2 = findViewById(R.id.gender);
         spinner.setOnItemSelectedListener(this);
         spinner2.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -65,10 +67,14 @@ public void PickDate(View view){
     }
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
+        Spinner spin = (Spinner)parent;
+        Spinner spin2 = (Spinner)parent;
+       if(spin.getId() == R.id.classes1)
         classesTX=parent.getItemAtPosition(pos).toString();
-        Log.i("Changed Drop",classesTX);
+
+        if(spin.getId() == R.id.gender)
         genderTX=parent.getItemAtPosition(pos).toString();
-        Log.i("Changed Drop",genderTX);
+
     }
     public void onNothingSelected(AdapterView<?> parent) {
         ///classesTX=parent.getItemAtPosition(0).toString();
@@ -81,23 +87,23 @@ public void PickDate(View view){
     }
 
     public void SubmitStudent(View view){
-
         EditText SID=findViewById(R.id.studentIDREG);
         EditText SName=findViewById(R.id.studentNameREG);
         EditText SParent1=findViewById(R.id.StudentP1);
         EditText SPhone1=findViewById(R.id.StudentPH1);
         EditText SParent2=findViewById(R.id.StudentP2);
         EditText SPhone2=findViewById(R.id.StudentPH2);
-
-
         String SID1,SName1,SClass1,SParent11,SParent22,gender;
+        Long SPhone11,SPhone22;
         String age12;
         age12=age11.getText().toString();
-        Long SPhone11,SPhone22;
-        SID1=SID.getText().toString();
+        SID1=SID.getText().toString().toUpperCase();
         SName1=SName.getText().toString();
         SClass1=classesTX;
+        Log.i("age is",age11.getText().toString());
+        Log.i("classes is",classesTX);
         gender=genderTX;
+        Log.i("gender is",genderTX);
         SParent11=SParent1.getText().toString();
         SPhone11= Long.valueOf(SPhone1.getText().toString());
         SParent22=SParent2.getText().toString();

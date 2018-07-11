@@ -127,15 +127,24 @@ public class Databasehelper extends SQLiteOpenHelper {
         StudentIDdata mainlist;
         if (cursor.moveToFirst()) {
             do {
+
                 mainlist = new StudentIDdata();
                 mainlist.setId(cursor.getString(0));
+
                 mainlist.setName(cursor.getString(1));
+
                 mainlist.setAge(cursor.getString(2));
+
                 mainlist.setGender(cursor.getString(3));
+
                 mainlist.setSClass(cursor.getString(4));
+
                 mainlist.setPname(cursor.getString(5));
+
                 mainlist.setPhone1(cursor.getLong(6));
+
                 mainlist.setName2(cursor.getString(7));
+
                 mainlist.setPhone2(cursor.getLong(8));
                 StudentMLinkedList.add(mainlist);
             } while (cursor.moveToNext());

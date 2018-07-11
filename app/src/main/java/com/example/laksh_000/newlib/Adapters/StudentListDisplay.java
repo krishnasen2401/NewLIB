@@ -54,6 +54,7 @@ public class StudentListDisplay extends RecyclerView.Adapter<StudentListDisplay.
         holder.Studentid.setText(studentnames1.getId());
         holder.Studentname.setText(studentnames1.getName());
         holder.classname.setText(studentnames1.getSClass());
+        Log.i("test1",studentnames1.getSClass());
         holder.layout.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override

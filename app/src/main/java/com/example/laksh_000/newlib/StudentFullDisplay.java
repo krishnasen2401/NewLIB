@@ -47,14 +47,6 @@ public class StudentFullDisplay extends AppCompatActivity {
             public void onClick(View v) {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 if (ActivityCompat.checkSelfPermission(StudentFullDisplay.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
                 callIntent.setData(Uri.parse("tel:"+pnum11));
