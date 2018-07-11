@@ -2,6 +2,7 @@ package com.example.laksh_000.newlib.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,9 +59,19 @@ public class StudentListDisplay extends RecyclerView.Adapter<StudentListDisplay.
             @Override
             public boolean onLongClick(View v) {
                 Intent intent=new Intent(mContext1,StudentFullDisplay.class);
-                intent.putExtra("Dataid",studentnames1.getId());
+                Bundle b = new Bundle();
+                b.putString("id",studentnames1.getId());
+                b.putString("name",studentnames1.getName());
+                b.putString("age",studentnames1.getAge());
+                b.putString("gender",studentnames1.getGender());
+                b.putString("class",studentnames1.getSClass());
+                b.putString("pname1",studentnames1.getName1());
+                b.putString("pnum1", String.valueOf(studentnames1.getPhone1()));
+                b.putString("pname2",studentnames1.getName2());
+                b.putString("pnum2", String.valueOf(studentnames1.getPhone2()));
+                intent.putExtras(b);
                 mContext1.startActivity(intent);
-                Log.i("Click Status","Long CLicked at"+studentnames1.getId());
+
                 return true;
             }
 
@@ -69,7 +80,16 @@ public class StudentListDisplay extends RecyclerView.Adapter<StudentListDisplay.
             @Override
 
             public void onClick(View v) {
-                Log.i("Click Status","Short CLicked at"+studentnames1.getId());
+               /* String Datatester=studentnames1.getId()+":"+studentnames1.getName()+":"+studentnames1.getAge()+":"+studentnames1.getGender()+":"+studentnames1.getSClass()+":"+studentnames1.getName1()+":"+studentnames1.getPhone1()+":"+studentnames1.getName2()+":"+studentnames1.getPhone2();
+                Log.i("id",studentnames1.getId());
+                Log.i("name",studentnames1.getName());
+                Log.i("age",studentnames1.getAge());
+                Log.i("gender",studentnames1.getGender());
+                Log.i("class", studentnames1.getSClass());
+                Log.i("name1",studentnames1.getName1());
+                Log.i("Phone1", String.valueOf(studentnames1.getPhone1()));
+                Log.i("name2",studentnames1.getName2());
+                Log.i("phone2", String.valueOf(studentnames1.getPhone2()));*/
             }
         });
 

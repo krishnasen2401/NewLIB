@@ -41,6 +41,6 @@ public void setId(String id){this.id=id;}
     public void setPhone2(long Phone22){this.Phone2=Phone22;}
     public String getAge(){return age;}
     public void setAge(String age){this.age=age;}
-    public String getGender(){return gender;}
-    public void setGender(){this.gender=gender;}
+    public String getGender(){return age;}
+    public void setGender(String gender){this.gender=gender;}
 }

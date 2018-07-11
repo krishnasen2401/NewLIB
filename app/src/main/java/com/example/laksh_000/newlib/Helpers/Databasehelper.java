@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.example.laksh_000.newlib.DataFiles.StudentIDdata;
@@ -93,7 +94,6 @@ public class Databasehelper extends SQLiteOpenHelper {
             //filter results by filter option provided
             query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY "+ filter;
         }
-
         List<BookidData> BooksLinkedList = new LinkedList<>();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -102,7 +102,6 @@ public class Databasehelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 books = new BookidData();
-
                 books.setId(cursor.getString(cursor.getColumnIndex(COLUMN_ID)));
                 books.setName(cursor.getString(cursor.getColumnIndex(Book_NAME)));
                 books.setStatus(cursor.getString(cursor.getColumnIndex(BOOK_Status)));
@@ -129,9 +128,15 @@ public class Databasehelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 mainlist = new StudentIDdata();
-                mainlist.setId(cursor.getString(cursor.getColumnIndex(STUDENTList_ID)));
-                mainlist.setName(cursor.getString(cursor.getColumnIndex(STUDENTList_NAME)));
-                mainlist.setSClass(cursor.getString(cursor.getColumnIndex(STUDENTList_CLASS)));
+                mainlist.setId(cursor.getString(0));
+                mainlist.setName(cursor.getString(1));
+                mainlist.setAge(cursor.getString(2));
+                mainlist.setGender(cursor.getString(3));
+                mainlist.setSClass(cursor.getString(4));
+                mainlist.setPname(cursor.getString(5));
+                mainlist.setPhone1(cursor.getLong(6));
+                mainlist.setName2(cursor.getString(7));
+                mainlist.setPhone2(cursor.getLong(8));
                 StudentMLinkedList.add(mainlist);
             } while (cursor.moveToNext());
         }
@@ -151,4 +156,5 @@ public class Databasehelper extends SQLiteOpenHelper {
         }
 
     }
+
 }
