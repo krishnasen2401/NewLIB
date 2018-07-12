@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.laksh_000.newlib.DataFiles.StudentIDdata;
@@ -17,13 +18,18 @@ import com.example.laksh_000.newlib.Helpers.Databasehelper;
 import java.util.ArrayList;
 
 public class StudentFullDisplay extends AppCompatActivity {
-    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studen_display_full);
         Bundle bundle = getIntent().getExtras();
+        ImageView v1=findViewById(R.id.imageView);
+        if(bundle.getString("gender").equals("Male"))
+            v1.setImageResource(R.drawable.boy);
+        else
+            v1.setImageResource(R.drawable.girl);
+
         TextView id1 = findViewById(R.id.StidDis);
         id1.setText(bundle.getString("id"));
         TextView name = findViewById(R.id.StNameDis);
