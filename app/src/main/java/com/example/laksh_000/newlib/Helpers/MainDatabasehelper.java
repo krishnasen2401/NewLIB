@@ -7,17 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.example.laksh_000.newlib.DataFiles.BookidData;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import com.example.laksh_000.newlib.DataFiles.BookidData;
+
+
 import com.example.laksh_000.newlib.DataFiles.StudentIDdata;
 public class MainDatabasehelper extends SQLiteOpenHelper {
     Context mycontext;
@@ -63,7 +57,8 @@ public class MainDatabasehelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Record);
        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENTList);
        Log.i("Change in version","increased to"+newVersion);
-        this.onCreate(db);}
+        this.onCreate(db);
+    }
 
     public void addNewStudent(StudentIDdata studentid,Context context){
         SQLiteDatabase db=this.getWritableDatabase();
