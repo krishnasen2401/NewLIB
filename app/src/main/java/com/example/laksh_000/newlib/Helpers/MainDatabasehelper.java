@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.example.laksh_000.newlib.DataFiles.StudentIDdata;
-public class Databasehelper extends SQLiteOpenHelper {
+public class MainDatabasehelper extends SQLiteOpenHelper {
     Context mycontext;
     public static final String DATABASE_NAME = "booksmain";
     //private static final int DATABASE_VERSION = 3 ;// in case app is failing it is because of version 0
@@ -39,7 +39,13 @@ public class Databasehelper extends SQLiteOpenHelper {
     public static final String STUDENTList_PNUMBER2="Pnumber2";
     public static final String STUDENTList_age="DOB";
     public static final String STUDENTList_gender="gender";
-    public Databasehelper(Context context) {
+    //bookhistory
+    public static final String TABLE_Record="Bookhistory";
+    public static final String Record_bookid="bookid";
+    public static final String Record_studentid="studentid";
+    public static final String Record_sentdate="sentdate";
+    public static final String Record_recevicedate="receviedate";
+    public MainDatabasehelper(Context context) {
         super(context, DATABASE_NAME , null, 1);
         this.mycontext=context;
     }
@@ -49,10 +55,12 @@ public class Databasehelper extends SQLiteOpenHelper {
         db.execSQL(" CREATE TABLE " + TABLE_NAME + " (" +COLUMN_ID + " Varchar PRIMARY KEY, " +Book_NAME + " Varchar NOT NULL, " +BOOK_Status + " Varchar NOT NULL);");
     //studentdb
         db.execSQL(" CREATE TABLE " + TABLE_STUDENTList + " (" + STUDENTList_ID + " Varchar PRIMARY KEY,"+STUDENTList_NAME+" varchar NOT NULL,"+STUDENTList_age+" varchar,"+STUDENTList_gender+" varchar,"+STUDENTList_CLASS+" varchar NOT NUll,"+STUDENTList_PNAME1+" varchar not null,"+STUDENTList_PNUMBER1+" decimal(10,0) not null,"+STUDENTList_PNAME2+" varchar not null,"+STUDENTList_PNUMBER2+" decimal(10,0) not null);");
+        db.execSQL(" CREATE TABLE " + TABLE_Record + " ("+Record_bookid +" Varchar, "+Record_studentid +" Varchar NOT NULL, " +Record_sentdate + " Varchar NOT NULL," +Record_recevicedate+ " Varchar);");
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
                     // you can implement here migration process
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_Record);
        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENTList);
        Log.i("Change in version","increased to"+newVersion);
         this.onCreate(db);}

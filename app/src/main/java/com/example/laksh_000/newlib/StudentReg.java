@@ -1,6 +1,5 @@
 package com.example.laksh_000.newlib;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,12 +12,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.laksh_000.newlib.DataFiles.StudentIDdata;
-import com.example.laksh_000.newlib.Helpers.Databasehelper;
+import com.example.laksh_000.newlib.Helpers.MainDatabasehelper;
 
 import java.util.Calendar;
 
 public class StudentReg extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
-    public Databasehelper h1;
+    public MainDatabasehelper h1;
     private String genderTX;
     private String classesTX;
     Spinner spinner;
@@ -109,7 +108,7 @@ public void PickDate(View view){
         SParent22=SParent2.getText().toString();
         SPhone22= Long.valueOf(SPhone2.getText().toString());
         Log.i("Phone Test",SPhone11.toString());
-        h1=new Databasehelper(this);
+        h1=new MainDatabasehelper(this);
         StudentIDdata sds=new StudentIDdata(SID1,SName1,age12,gender,SClass1,SParent11,SPhone11,SParent22,SPhone22);
         h1.addNewStudent(sds,this);
     }

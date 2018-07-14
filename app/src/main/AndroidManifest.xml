@@ -15,6 +15,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -23,6 +24,8 @@
         <activity android:name=".Display" />
         <activity android:name=".StudentListDisplayXml" />
         <activity android:name=".StudentFullDisplay" />
+        <activity android:name=".AddBook" />
+        <activity android:name=".BookRecordAdd"></activity>
     </application>
 
 </manifest>

@@ -9,26 +9,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ajts.androidmads.library.SQLiteToExcel;
-import com.example.laksh_000.newlib.DataFiles.BookidData;
-import com.example.laksh_000.newlib.Helpers.Databasehelper;
 
 public class MainActivity extends AppCompatActivity {
-    public Databasehelper h1;
-public void AddBook(View view){
-    h1=new Databasehelper(this);
-    EditText id=findViewById(R.id.BookIdReg);
-    EditText name=findViewById(R.id.BookNameReg);
-    String id1=id.getText().toString().toUpperCase();
-    String name1=name.getText().toString();
-    BookidData bookidData=new BookidData(id1,name1,"Y");
-    h1.saveNewbook(bookidData,this);
-    id.getText().clear();
-    name.getText().clear();
-}
+    public void AddBooknew(View view){
+        Intent intent=new Intent(this,AddBook.class);
+        startActivity(intent);
+    }
+    public void newbookRec(View view){
+        Intent intent=new Intent(this,BookRecordAdd.class);
+        startActivity(intent);
+    }
+
 public void PermissionRequest1(){
     Log.i("Permission","checking");
     // Here, thisActivity is the current activity

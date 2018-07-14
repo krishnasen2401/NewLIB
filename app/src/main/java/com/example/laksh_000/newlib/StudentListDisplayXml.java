@@ -6,10 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.laksh_000.newlib.Adapters.StudentListDisplay;
-import com.example.laksh_000.newlib.Helpers.Databasehelper;
+import com.example.laksh_000.newlib.Helpers.MainDatabasehelper;
 
 public class StudentListDisplayXml extends AppCompatActivity {
-    Databasehelper dbhelper;
+    MainDatabasehelper dbhelper;
     StudentListDisplay adaper1;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -20,7 +20,7 @@ public class StudentListDisplayXml extends AppCompatActivity {
         mRecyclerView=findViewById(R.id.StudentAll);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        dbhelper=new Databasehelper(this);
+        dbhelper=new MainDatabasehelper(this);
         adaper1=new StudentListDisplay(dbhelper.studentviewlist(""),this,mRecyclerView);
         mRecyclerView.setAdapter(adaper1);
     }

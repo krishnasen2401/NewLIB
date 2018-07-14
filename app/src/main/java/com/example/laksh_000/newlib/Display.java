@@ -6,10 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.laksh_000.newlib.Adapters.BooksDisplayAdapter;
-import com.example.laksh_000.newlib.Helpers.Databasehelper;
+import com.example.laksh_000.newlib.Helpers.MainDatabasehelper;
 
 public class Display extends AppCompatActivity {
-    Databasehelper dbhelper;
+    MainDatabasehelper dbhelper;
     BooksDisplayAdapter adapter;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -20,7 +20,7 @@ public class Display extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.tvAnimalName);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        dbhelper=new Databasehelper(this);
+        dbhelper=new MainDatabasehelper(this);
         adapter = new BooksDisplayAdapter(dbhelper.bookviewlist(""), this, mRecyclerView);
         mRecyclerView.setAdapter(adapter);
     }

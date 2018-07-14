@@ -1,21 +1,12 @@
 package com.example.laksh_000.newlib;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.laksh_000.newlib.DataFiles.StudentIDdata;
-import com.example.laksh_000.newlib.Helpers.Databasehelper;
-
-import java.util.ArrayList;
 
 public class StudentFullDisplay extends AppCompatActivity {
 

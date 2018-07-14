@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.laksh_000.newlib.DataFiles.BookidData;
-import com.example.laksh_000.newlib.Helpers.Databasehelper;
+import com.example.laksh_000.newlib.Helpers.MainDatabasehelper;
 import com.example.laksh_000.newlib.R;
 
 import java.util.List;
@@ -84,7 +84,7 @@ public class BooksDisplayAdapter  extends RecyclerView.Adapter<BooksDisplayAdapt
        holder.modifybt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        Databasehelper dbHelper = new Databasehelper(mContext);
+                        MainDatabasehelper dbHelper = new MainDatabasehelper(mContext);
                         dbHelper.deletebookRecord(booksnames1.getId(), mContext);
                         mPeopleList.remove(position);
                         mRecyclerV.removeViewAt(position);
