@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity{
     private static final int REQUEST_CODE_SIGN_IN = 0;
     private DriveClient mDriveClient;
     private DriveResourceClient mDriveResourceClient;
+    protected GoogleSignInClient mGoogleSignInClient;
     public void AddBooknew(View view){
         Intent intent=new Intent(this,AddBook.class);
         startActivity(intent);
@@ -123,20 +124,19 @@ public void DisplayBookList(View view){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         PermissionRequest1();
-        signIn();
     }
     public void DisplayStudent1(View v){
         Intent intent=new Intent(this,StudentListDisplayXml.class);
         startActivity(intent);
-
     }
     public void signIn() {
-        GoogleSignInClient GoogleSignInClient = buildGoogleSignInClient();
-        startActivityForResult(GoogleSignInClient.getSignInIntent(), REQUEST_CODE_SIGN_IN);
+        mGoogleSignInClient= buildGoogleSignInClient();
+        startActivityForResult(mGoogleSignInClient.getSignInIntent(), REQUEST_CODE_SIGN_IN);
     }
     public GoogleSignInClient buildGoogleSignInClient() {
         GoogleSignInOptions signInOptions =
                 new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestScopes(Drive.SCOPE_APPFOLDER)
                         .requestScopes(Drive.SCOPE_FILE)
                         .build();
         return GoogleSignIn.getClient(this, signInOptions);
@@ -160,6 +160,9 @@ public void DisplayBookList(View view){
                 break;
         }
     }
+    public void Gdrivebackup(View v){
+      signIn();
+    }
     private void createFileInAppFolder() {
 
         final Task<DriveFolder> appFolderTask = mDriveResourceClient.getAppFolder();
@@ -172,13 +175,11 @@ public void DisplayBookList(View view){
                     try (Writer writer = new OutputStreamWriter(outputStream)) {
                         writer.write("Hello World!");
                     }
-
                     MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
-                            .setTitle("New file")
+                            .setTitle("HelloWorld.txt")
                             .setMimeType("text/plain")
                             .setStarred(true)
                             .build();
-
                     return mDriveResourceClient.createFile(parent, changeSet, contents);
                 })
                 .addOnSuccessListener(this,
