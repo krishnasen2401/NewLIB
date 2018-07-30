@@ -11,5 +11,6 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
-
+    <string name="file_created">Created file: %1$s.</string>
+    <string name="file_create_error">Error while trying to create the file.</string>
 </resources>

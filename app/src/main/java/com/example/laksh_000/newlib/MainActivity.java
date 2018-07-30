@@ -2,6 +2,7 @@ package com.example.laksh_000.newlib;
 
 import android.Manifest;
 
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
@@ -12,9 +13,25 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.ajts.androidmads.library.SQLiteToExcel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveClient;
+import com.google.android.gms.drive.DriveContents;
+import com.google.android.gms.drive.DriveFolder;
+import com.google.android.gms.drive.DriveResourceClient;
+import com.google.android.gms.drive.MetadataChangeSet;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 public class MainActivity extends AppCompatActivity{
-
+    private static final int REQUEST_CODE_SIGN_IN = 0;
+    private DriveClient mDriveClient;
+    private DriveResourceClient mDriveResourceClient;
     public void AddBooknew(View view){
         Intent intent=new Intent(this,AddBook.class);
         startActivity(intent);
@@ -43,10 +60,6 @@ public void PermissionRequest1(){
             // No explanation needed; request the permission
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
-
-            // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-            // app-defined int constant. The callback method gets the
-            // result of the request.
         }
     } else {
         Log.i("Permission","gotit");
@@ -64,14 +77,11 @@ public void PermissionRequest1(){
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
                 } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+
                 }
                 return;
             }
 
-            // other 'case' lines to check for other
-            // permissions this app might request.
         }
     }
 
@@ -113,11 +123,72 @@ public void DisplayBookList(View view){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         PermissionRequest1();
-
+        signIn();
     }
     public void DisplayStudent1(View v){
         Intent intent=new Intent(this,StudentListDisplayXml.class);
         startActivity(intent);
-    }
 
+    }
+    public void signIn() {
+        GoogleSignInClient GoogleSignInClient = buildGoogleSignInClient();
+        startActivityForResult(GoogleSignInClient.getSignInIntent(), REQUEST_CODE_SIGN_IN);
+    }
+    public GoogleSignInClient buildGoogleSignInClient() {
+        GoogleSignInOptions signInOptions =
+                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestScopes(Drive.SCOPE_FILE)
+                        .build();
+        return GoogleSignIn.getClient(this, signInOptions);
+    }
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_CODE_SIGN_IN:
+                Log.i("account", "Sign in request code");
+                // Called after user is signed in.
+                if (resultCode == RESULT_OK) {
+                    Log.i("account", "Signed in successfully.");
+                    // Use the last signed in account here since it already have a Drive scope.
+                    mDriveClient = Drive.getDriveClient(this, GoogleSignIn.getLastSignedInAccount(this));
+                    // Build a drive resource client.
+                    mDriveResourceClient =
+                            Drive.getDriveResourceClient(this, GoogleSignIn.getLastSignedInAccount(this));
+                    // Start backup.
+                    createFileInAppFolder();
+                }
+                break;
+        }
+    }
+    private void createFileInAppFolder() {
+
+        final Task<DriveFolder> appFolderTask = mDriveResourceClient.getAppFolder();
+        final Task<DriveContents> createContentsTask = mDriveResourceClient.createContents();
+        Tasks.whenAll(appFolderTask, createContentsTask)
+                .continueWithTask(task -> {
+                    DriveFolder parent = appFolderTask.getResult();
+                    DriveContents contents = createContentsTask.getResult();
+                    OutputStream outputStream = contents.getOutputStream();
+                    try (Writer writer = new OutputStreamWriter(outputStream)) {
+                        writer.write("Hello World!");
+                    }
+
+                    MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
+                            .setTitle("New file")
+                            .setMimeType("text/plain")
+                            .setStarred(true)
+                            .build();
+
+                    return mDriveResourceClient.createFile(parent, changeSet, contents);
+                })
+                .addOnSuccessListener(this,
+                        driveFile -> {
+                    Log.i("status creation","created");
+                            finish();
+                        })
+                .addOnFailureListener(this, e -> {
+                    Log.e("file", "Unable to create file", e);
+                    finish();
+                });
+    }
 }
