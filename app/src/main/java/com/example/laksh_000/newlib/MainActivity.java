@@ -185,11 +185,11 @@ public void DisplayBookList(View view){
                 .addOnSuccessListener(this,
                         driveFile -> {
                     Log.i("status creation","created");
-                            finish();
+                            //finish(); intent will close here
                         })
                 .addOnFailureListener(this, e -> {
                     Log.e("file", "Unable to create file", e);
-                    finish();
+                    //finish();
                 });
     }
 }
