@@ -5,6 +5,7 @@ import android.Manifest;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.ajts.androidmads.library.SQLiteToExcel;
+import com.example.laksh_000.newlib.Helpers.BookRecord;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -24,9 +26,12 @@ import com.google.android.gms.drive.DriveResourceClient;
 import com.google.android.gms.drive.MetadataChangeSet;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+
 
 public class MainActivity extends AppCompatActivity{
     private static final int REQUEST_CODE_SIGN_IN = 0;
@@ -160,10 +165,16 @@ public void DisplayBookList(View view){
                 break;
         }
     }
-    public void Gdrivebackup(View v){
-      signIn();
+    public void Gdrivebackup(View v) throws IOException {
+        BookRecord db=new BookRecord(this);
+        db.backupDB(this);
+        signIn();
     }
     private void createFileInAppFolder() {
+        final String packageName = this.getPackageName();
+        String DB_FILEPATH = "/data/data/" + packageName + "/databases/booksmain";
+        String inFileName = DB_FILEPATH;
+        File dbFile = new File(inFileName);
 
         final Task<DriveFolder> appFolderTask = mDriveResourceClient.getAppFolder();
         final Task<DriveContents> createContentsTask = mDriveResourceClient.createContents();
@@ -171,13 +182,25 @@ public void DisplayBookList(View view){
                 .continueWithTask(task -> {
                     DriveFolder parent = appFolderTask.getResult();
                     DriveContents contents = createContentsTask.getResult();
-                    OutputStream outputStream = contents.getOutputStream();
-                    try (Writer writer = new OutputStreamWriter(outputStream)) {
-                        writer.write("Hello World!");
+                    //OutputStream outputStream = contents.getOutputStream();
+                   // try (Writer writer = new OutputStreamWriter(outputStream)) {
+                     //   writer.write("Hello World!");
+                    //}
+                    FileInputStream fis = new FileInputStream(dbFile);
+                    OutputStream output = contents.getOutputStream();
+                    // transfer bytes from the inputfile to the outputfile
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = fis.read(buffer)) > 0) {
+                        output.write(buffer, 0, length);
                     }
+                    // Close the streams
+                    output.flush();
+                    output.close();
+                    fis.close();
                     MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
-                            .setTitle("HelloWorld.txt")
-                            .setMimeType("text/plain")
+                            .setTitle("School")
+                            //.setMimeType("application/octet-stream")
                             .setStarred(true)
                             .build();
                     return mDriveResourceClient.createFile(parent, changeSet, contents);
@@ -192,4 +215,5 @@ public void DisplayBookList(View view){
                     //finish();
                 });
     }
+
 }

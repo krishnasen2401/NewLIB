@@ -4,9 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 import android.util.Log;
 
 import com.example.laksh_000.newlib.DataFiles.BookHistory;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class BookRecord extends MainDatabasehelper {
     public BookRecord(Context context) {
@@ -52,4 +60,26 @@ public class BookRecord extends MainDatabasehelper {
         //cursor.close();
         db.close();//upda1temain book table status
     }
+    public void backupDB(Context context) throws IOException {
+        final String packageName = context.getPackageName();
+        String DB_FILEPATH = "/data/data/" + packageName + "/databases/booksmain";
+        String inFileName = DB_FILEPATH;
+        File dbFile = new File(inFileName);
+        FileInputStream fis = new FileInputStream(dbFile);
+
+        String outFileName = Environment.getExternalStorageDirectory()+"/schoool";
+        // Open the empty db as the output stream
+        OutputStream output = new FileOutputStream(outFileName);
+        // transfer bytes from the inputfile to the outputfile
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = fis.read(buffer)) > 0) {
+            output.write(buffer, 0, length);
+        }
+        // Close the streams
+        output.flush();
+        output.close();
+        fis.close();
+    }
+
 }
