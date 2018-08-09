@@ -31,5 +31,4 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.google.android.gms:play-services-drive:15.0.1'
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
-
 }
