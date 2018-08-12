@@ -67,7 +67,6 @@ public void PickDate(View view){
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         Spinner spin = (Spinner)parent;
-        Spinner spin2 = (Spinner)parent;
        if(spin.getId() == R.id.classes1)
         classesTX=parent.getItemAtPosition(pos).toString();
 
